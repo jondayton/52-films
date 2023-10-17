@@ -36,6 +36,7 @@ const validate = (data: { description: string }): {[key: string]: boolean} => {
   }, {})
 }
 
+
 export default function MovieCard(props: MovieCardProps): JSX.Element {
   const { movie } = props
   const [rating, setRating] = useState<number>(0)
@@ -66,14 +67,14 @@ export default function MovieCard(props: MovieCardProps): JSX.Element {
         <p>{movie.title}</p>
       </Link>
       <p>{movie.description}</p>
-      <div onClick={addToWatchlist}>+</div>
+      <button onClick={addToWatchlist}>+</button>
       <div>
-        <p onClick={() => addRating(0)}>☒</p>
-        <p onClick={() => addRating(1)}>{rating > 0 ? '★' : '☆'}</p>
-        <p onClick={() => addRating(2)}>{rating > 1 ? '★' : '☆'}</p>
-        <p onClick={() => addRating(3)}>{rating > 2 ? '★' : '☆'}</p>
-        <p onClick={() => addRating(4)}>{rating > 3 ? '★' : '☆'}</p>
-        <p onClick={() => addRating(5)}>{rating > 4 ? '★' : '☆'}</p>
+        <button onClick={() => addRating(0)}>☒</button>
+        <button onClick={() => addRating(1)}>{rating > 0 ? '★' : '☆'}</button>
+        <button onClick={() => addRating(2)}>{rating > 1 ? '★' : '☆'}</button>
+        <button onClick={() => addRating(3)}>{rating > 2 ? '★' : '☆'}</button>
+        <button onClick={() => addRating(4)}>{rating > 3 ? '★' : '☆'}</button>
+        <button onClick={() => addRating(5)}>{rating > 4 ? '★' : '☆'}</button>
       </div>
       <input className={validations.description === false ? 'not-valid' : 'valid'} type="text" onChange={(e) => setDescription(e.target.value)} />
       <button onClick={saveDescription}>Save</button>
