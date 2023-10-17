@@ -1,0 +1,41 @@
+version: '2.1'
+
+jobs:
+  npm_install:
+    docker:
+      - image: cimg/node:20.8
+
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore node_modules from cache
+          key: node_modules-{{ checksum "package-lock.json" }}
+
+      - run: npm install
+
+      - save_cache:
+          name: Cache node_modules
+          key: node_modules-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+
+  lint_ts:
+    docker:
+      - image: cimg/node:20.8
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore node_modules from cache
+          key: node_modules-{{ checksum "package-lock.json" }}
+      - run:
+          name: Run Eslint
+          command: npm run lint
+
+workflows:
+  version: 2
+  run_tests:
+    jobs:
+      - npm_install
+      - lint_ts:
+          requires:
+            - npm_install
