@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:js": "eslint app components --ext js,jsx,ts,tsx"
+    "docs": "typedoc"
   },
   "dependencies": {
     "@prisma/client": "5.4.2",
