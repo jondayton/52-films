@@ -5,7 +5,7 @@ import { Movie } from "@/interfaces/models"
 import Link from "next/link"
 import { useState } from "react";
 
-interface MovieCardProps {
+export interface MovieCardProps {
   movie: Movie
   rating: number
 }
@@ -28,6 +28,11 @@ const validationRules: ValidationRules = {
   }
 }
 
+/**
+ * Validates form field data
+ * @param data an object of keys and validation rules to apply
+ * @returns an object of key validations and a boolean as to whether or not they passed validation
+ */
 const validate = (data: { description: string }): {[key: string]: boolean} => {
   return Object.entries(data).reduce((acc: {[key: string]: boolean}, [key, value]) => {
     const { required, minLength, maxLength } = validationRules[key]
@@ -36,7 +41,9 @@ const validate = (data: { description: string }): {[key: string]: boolean} => {
   }, {})
 }
 
-
+/**
+ * A card component to display and rate movies
+ */
 export default function MovieCard(props: MovieCardProps): JSX.Element {
   const { movie } = props
   const [rating, setRating] = useState<number>(0)
