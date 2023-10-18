@@ -44,11 +44,11 @@ export default async function QueueIndex (): Promise<JSX.Element> {
     <>
       <h1>Old Favorites</h1>
       {TEMP_FAVORITES.map((movie) => (
-        <MovieCard movie={movie} key={movie.id} />
+        <MovieCard movie={movie} key={movie.id} rating={5} />
       ))}
       <h1>New Releases</h1>
       {new_releases.map((movie) => (
-        <MovieCard movie={movie} key={movie.id} />
+        <MovieCard movie={movie} key={movie.id} rating={5} />
       ))}
     </>
   )
