@@ -27,6 +27,6 @@
   "typedocOptions": {
     "out": "docs",
     "entryPointStrategy": "expand",
-    "entryPoints": ["./app", "./components", "./interfaces"],
+    "entryPoints": ["./app", "./components", "./interfaces"]
   }
 }
