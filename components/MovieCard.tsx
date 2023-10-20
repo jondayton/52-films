@@ -1,23 +1,23 @@
 'use client';
 
 import '@/app/globals.css';
-import { Movie } from "@/interfaces/models"
-import Link from "next/link"
-import { useState } from "react";
+import { Movie } from '@/interfaces/models';
+import Link from 'next/link';
+import { useState } from 'react';
 
 export interface MovieCardProps {
-  movie: Movie
-  rating: number
+  movie: Movie;
+  rating: number;
 }
 
 interface ValidationRule {
-  required: boolean
-  minLength: number
-  maxLength: number
+  required: boolean;
+  minLength: number;
+  maxLength: number;
 }
 
 interface ValidationRules {
-  [key: string]: ValidationRule
+  [key: string]: ValidationRule;
 }
 
 const validationRules: ValidationRules = {
@@ -25,48 +25,48 @@ const validationRules: ValidationRules = {
     required: true,
     minLength: 10,
     maxLength: 1000,
-  }
-}
+  },
+};
 
 /**
  * Validates form field data
  * @param data an object of keys and validation rules to apply
  * @returns an object of key validations and a boolean as to whether or not they passed validation
  */
-const validate = (data: { description: string }): {[key: string]: boolean} => {
-  return Object.entries(data).reduce((acc: {[key: string]: boolean}, [key, value]) => {
-    const { required, minLength, maxLength } = validationRules[key]
-    const valid = value.length > minLength && value.length < maxLength || !required
-    return { ...acc, [key]: valid }
-  }, {})
-}
+const validate = (data: { description: string }): { [key: string]: boolean } => {
+  return Object.entries(data).reduce((acc: { [key: string]: boolean }, [key, value]) => {
+    const { required, minLength, maxLength } = validationRules[key];
+    const valid = (value.length > minLength && value.length < maxLength) || !required;
+    return { ...acc, [key]: valid };
+  }, {});
+};
 
 /**
  * A card component to display and rate movies
  */
 export default function MovieCard(props: MovieCardProps): JSX.Element {
-  const { movie } = props
-  const [rating, setRating] = useState<number>(0)
-  const [description, setDescription] = useState<string>('')
-  const [validations, setValidations] = useState<{[key: string]: boolean}>({})
-  const [isValid, setIsValid] = useState<boolean>(true)
+  const { movie } = props;
+  const [rating, setRating] = useState<number>(0);
+  const [description, setDescription] = useState<string>('');
+  const [validations, setValidations] = useState<{ [key: string]: boolean }>({});
+  const [isValid, setIsValid] = useState<boolean>(true);
 
   const addToWatchlist = (): void => {
-    console.log(`Adding ${movie.title} to watchlist`)
-  }
+    console.log(`Adding ${movie.title} to watchlist`);
+  };
 
   const addRating = (rating: number): void => {
-    setRating(rating)
-  }
+    setRating(rating);
+  };
 
   const saveDescription = (): void => {
     setValidations(validate({ description }));
     setIsValid(Object.values(validations).every((valid) => valid));
 
     if (isValid) {
-      console.log(`Saving description for ${movie.title}`, description)
+      console.log(`Saving description for ${movie.title}`, description);
     }
-  }
+  };
 
   return (
     <>
@@ -83,7 +83,11 @@ export default function MovieCard(props: MovieCardProps): JSX.Element {
         <button onClick={() => addRating(4)}>{rating > 3 ? '★' : '☆'}</button>
         <button onClick={() => addRating(5)}>{rating > 4 ? '★' : '☆'}</button>
       </div>
-      <input className={validations.description === false ? 'not-valid' : 'valid'} type="text" onChange={(e) => setDescription(e.target.value)} />
+      <input
+        className={validations.description === false ? 'not-valid' : 'valid'}
+        type="text"
+        onChange={(e) => setDescription(e.target.value)}
+      />
       <button onClick={saveDescription}>Save</button>
     </>
   );

@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "docs": "typedoc"
+    "docs": "typedoc",
+    "ts:format": "prettier --write --ignore-unknown",
+    "ts:check": "prettier --check --ignore-unknown",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@prisma/client": "5.4.2",
@@ -28,10 +31,17 @@
     "eslint-config-next": "latest",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-jsx-a11y": "^6.7.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.1",
     "postcss": "latest",
+    "prettier": "^3.0.3",
     "prisma": "^5.4.2",
     "tailwindcss": "latest",
     "typedoc": "^0.25.2",
     "typescript": "latest"
+  },
+  "lint-staged": {
+    "*.ts": "prettier --write --ignore-unknown",
+    "*.json": "prettier --write --ignore-unknown"
   }
 }
