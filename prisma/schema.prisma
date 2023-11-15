@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+  password String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @default(now()) @map("updated_at")
+  @@map("users")
+}
+
+model Movie {
+  id Int @id @default(autoincrement())
+  title String
+  description String
+  releaseDate DateTime
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @default(now()) @map("updated_at")
+  @@map("movies")
+}
+
+model Rating {
+  id Int @id @default(autoincrement())
+  rating Int
+  movieId Int @map("movie_id")
+  userId Int @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @default(now()) @map("updated_at")
+  @@map("ratings")
+}
+
+model Watchlist {
+  id Int @id @default(autoincrement())
+  priority Int
+  movieId Int @map("movie_id")
+  userId Int @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @default(now()) @map("updated_at")
+  @@map("watchlists")
+}
+
+model Wishlist {
+  id Int @id @default(autoincrement())
+  movieId Int @map("movie_id")
+  userId Int @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @default(now()) @map("updated_at")
+  @@map("wishlists")
+}
+
+
