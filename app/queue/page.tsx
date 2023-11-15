@@ -51,7 +51,7 @@ export default async function QueueIndex(): Promise<JSX.Element> {
   const new_releases: Movie[] = await new Promise((resolve) => setTimeout(() => resolve(TEMP_NEW_RELEASES), 1000));
   return (
     <>
-      <h1>Old Favorites</h1>
+      <h1 className="text-xl">Old Favorites</h1>
       {TEMP_FAVORITES.map((movie) => (
         <MovieCard movie={movie} key={movie.id} rating={5} />
       ))}

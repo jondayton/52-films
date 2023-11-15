@@ -4,6 +4,7 @@ import '@/app/globals.css';
 import { Movie } from '@/interfaces/models';
 import Link from 'next/link';
 import { useState } from 'react';
+import { Card, Rating, Button } from 'flowbite-react';
 
 export interface MovieCardProps {
   movie: Movie;
@@ -69,26 +70,25 @@ export default function MovieCard(props: MovieCardProps): JSX.Element {
   };
 
   return (
-    <>
+    <Card>
       <Link href={`/movies/${movie.id}`} key={movie.id}>
         <p>{movie.title}</p>
       </Link>
       <p>{movie.description}</p>
       <button onClick={addToWatchlist}>+</button>
-      <div>
-        <button onClick={() => addRating(0)}>☒</button>
-        <button onClick={() => addRating(1)}>{rating > 0 ? '★' : '☆'}</button>
-        <button onClick={() => addRating(2)}>{rating > 1 ? '★' : '☆'}</button>
-        <button onClick={() => addRating(3)}>{rating > 2 ? '★' : '☆'}</button>
-        <button onClick={() => addRating(4)}>{rating > 3 ? '★' : '☆'}</button>
-        <button onClick={() => addRating(5)}>{rating > 4 ? '★' : '☆'}</button>
-      </div>
+      <Rating>
+        <Rating.Star onClick={() => addRating(1)} filled={rating > 0} />
+        <Rating.Star onClick={() => addRating(2)} filled={rating > 1} />
+        <Rating.Star onClick={() => addRating(3)} filled={rating > 2} />
+        <Rating.Star onClick={() => addRating(4)} filled={rating > 3} />
+        <Rating.Star onClick={() => addRating(5)} filled={rating > 4} />
+      </Rating>
       <input
         className={validations.description === false ? 'not-valid' : 'valid'}
         type="text"
         onChange={(e) => setDescription(e.target.value)}
       />
-      <button onClick={saveDescription}>Save</button>
-    </>
+      <Button onClick={saveDescription} color="blue">Save</Button>
+    </Card>
   );
 }
