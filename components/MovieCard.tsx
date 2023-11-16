@@ -70,19 +70,21 @@ export default function MovieCard(props: MovieCardProps): JSX.Element {
   };
 
   return (
-    <Card>
+    <Card className="max-w-sm">
       <Link href={`/movies/${movie.id}`} key={movie.id}>
         <p>{movie.title}</p>
       </Link>
       <p>{movie.description}</p>
-      <button onClick={addToWatchlist}>+</button>
-      <Rating>
-        <Rating.Star onClick={() => addRating(1)} filled={rating > 0} />
-        <Rating.Star onClick={() => addRating(2)} filled={rating > 1} />
-        <Rating.Star onClick={() => addRating(3)} filled={rating > 2} />
-        <Rating.Star onClick={() => addRating(4)} filled={rating > 3} />
-        <Rating.Star onClick={() => addRating(5)} filled={rating > 4} />
-      </Rating>
+      <div className="flex justify-between">
+        <Rating>
+          <Rating.Star onClick={() => addRating(1)} filled={rating > 0} />
+          <Rating.Star onClick={() => addRating(2)} filled={rating > 1} />
+          <Rating.Star onClick={() => addRating(3)} filled={rating > 2} />
+          <Rating.Star onClick={() => addRating(4)} filled={rating > 3} />
+          <Rating.Star onClick={() => addRating(5)} filled={rating > 4} />
+        </Rating>
+        <button onClick={addToWatchlist}>+</button>
+      </div>
       <input
         className={validations.description === false ? 'not-valid' : 'valid'}
         type="text"

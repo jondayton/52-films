@@ -50,15 +50,23 @@ const TEMP_NEW_RELEASES: Movie[] = [
 export default async function QueueIndex(): Promise<JSX.Element> {
   const new_releases: Movie[] = await new Promise((resolve) => setTimeout(() => resolve(TEMP_NEW_RELEASES), 1000));
   return (
-    <>
+    <div className="p-2">
       <h1 className="text-xl">Old Favorites</h1>
-      {TEMP_FAVORITES.map((movie) => (
-        <MovieCard movie={movie} key={movie.id} rating={5} />
-      ))}
-      <h1>New Releases</h1>
-      {new_releases.map((movie) => (
-        <MovieCard movie={movie} key={movie.id} rating={5} />
-      ))}
-    </>
+      <div className="">
+        {TEMP_FAVORITES.map((movie) => (
+          <div className="float-left p-2 pt-0" key={movie.id}>
+            <MovieCard movie={movie} rating={5} />
+          </div>
+        ))}
+      </div>
+      <div className="inline-block">
+      <h1 className="text-xl">New Releases</h1>
+        {new_releases.map((movie) => (
+          <div className="float-left p-2 pt-0" key={movie.id}>
+            <MovieCard movie={movie} rating={5} />
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
