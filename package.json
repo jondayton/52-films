@@ -12,6 +12,9 @@
     "ts:check": "prettier --check --ignore-unknown",
     "prepare": "husky install"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "5.4.2",
     "flowbite": "^1.8.1",
