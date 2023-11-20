@@ -23,20 +23,24 @@ model User {
 model Movie {
   id Int @id @default(autoincrement())
   title String
-  description String
-  releaseDate DateTime
+  description String?
+  releasedAt DateTime @map("released_at")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @default(now()) @map("updated_at")
+
+  @@unique([title, releasedAt])
   @@map("movies")
 }
 
 model Rating {
   id Int @id @default(autoincrement())
-  rating Int
+  rating Int?
   movieId Int @map("movie_id")
   userId Int @map("user_id")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @default(now()) @map("updated_at")
+
+  @@unique([movieId, userId])
   @@map("ratings")
 }
 
@@ -47,6 +51,8 @@ model Watchlist {
   userId Int @map("user_id")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @default(now()) @map("updated_at")
+
+  @@unique([movieId, userId])
   @@map("watchlists")
 }
 
@@ -56,6 +62,8 @@ model Wishlist {
   userId Int @map("user_id")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @default(now()) @map("updated_at")
+
+  @@unique([movieId, userId])
   @@map("wishlists")
 }
 
